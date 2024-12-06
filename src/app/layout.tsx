@@ -1,5 +1,5 @@
-import appConfig from "@/config/appConfig";
-import type { Metadata } from "next";
+import appConfig from "@/configs/appConfig";
+import RainbowProvider from "@/providers/RainbowProvider";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -9,7 +9,7 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export const metadata: Metadata = {
+export const metadata = {
   title: appConfig.title,
   description: appConfig.description,
 };
@@ -21,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        <RainbowProvider>{children}</RainbowProvider>
+      </body>
     </html>
   );
 }
