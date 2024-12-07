@@ -13,7 +13,7 @@ const supportedChains: Chain[] = [sepolia, bscTestnet, blastSepolia];
 export const wagmiConfig = getDefaultConfig({
   appName: appConfig.title,
   projectId,
-  // TODO: Fix any error
+  // TODO: Fix any error on supportedChains
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   chains: supportedChains as any,
   ssr: true,
