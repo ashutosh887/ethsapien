@@ -3,11 +3,11 @@ const appConfig = {
   description:
     "Decentralized AI-Powered Credentialing System for On-Chain Identity Verification and Reputation",
   socials: {
-    email: "mailto:contact@ethsapien.com",
-    telegram: "https://t.me/ethsapien",
-    linkedin: "https://linkedin.com/company/ethsapien",
-    github: "https://github.com/ethsapien",
-    twitter: "https://twitter.com/ethsapien",
+    email: "mailto:ashutoshj887@gmail.com",
+    telegram: "https://t.me/ashutosh887",
+    linkedin: "https://linkedin.com/in/ashutosh887",
+    github: "https://github.com/ashutosh887",
+    twitter: "https://twitter.com/ashutosh887_",
   },
 };
 

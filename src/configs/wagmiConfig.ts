@@ -5,8 +5,7 @@ import { Chain, getDefaultConfig } from "@rainbow-me/rainbowkit";
 import { cookieStorage, createStorage, http } from "wagmi";
 import { blastSepolia, bscTestnet, sepolia } from "wagmi/chains";
 
-// TODO: fix projectId
-const projectId = "YOUR_PROJECT_ID"; // Replace with your actual project ID
+const projectId = `${process.env.NEXT_PUBLIC_PROJECT_ID}`;
 
 const supportedChains: Chain[] = [sepolia, bscTestnet, blastSepolia];
 
