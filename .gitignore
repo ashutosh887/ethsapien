@@ -35,7 +35,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# markdown files for reference
-ETHSapien.md
-GPTResponse.md
-Components.md
+/res
