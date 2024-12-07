@@ -1,6 +1,6 @@
 "use client";
 
-import Loader from "@/components/custom/Loader";
+import Loader from "@/components/custom/loader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -13,7 +13,7 @@ type Props = {
 
 export default function ProtectionProvider({
   children,
-  redirectTo = "/dashboard", // Default redirect path
+  redirectTo = "/dashboard",
   allowWhenAuthenticated = false,
 }: Props) {
   const { status } = useSession();

@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/custom/footer";
-import Loader from "@/components/custom/Loader";
+import Loader from "@/components/custom/loader";
 import { Button } from "@/components/ui/button";
 import appConfig from "@/configs/appConfig";
 import { routerConfig } from "@/configs/routerConfig";
