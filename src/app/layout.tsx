@@ -1,5 +1,7 @@
+import Navbar from "@/components/custom/navbar";
 import appConfig from "@/configs/appConfig";
 import RainbowProvider from "@/providers/RainbowProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -22,7 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        <RainbowProvider>{children}</RainbowProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <RainbowProvider>
+            <Navbar />
+            <main>{children}</main>
+          </RainbowProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

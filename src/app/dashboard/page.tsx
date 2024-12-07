@@ -1,6 +1,6 @@
 import ProtectedRoute from "@/providers/ProtectionProvider";
 
-const Dashboard = () => {
+const DashboardPage = () => {
   return (
     <ProtectedRoute>
       <div className="h-screen flex justify-center items-center">
@@ -10,4 +10,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

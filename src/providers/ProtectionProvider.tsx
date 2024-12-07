@@ -1,5 +1,6 @@
 "use client";
 
+import Loader from "@/components/custom/Loader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -7,11 +8,13 @@ import React, { useEffect } from "react";
 type Props = {
   children: React.ReactNode;
   redirectTo?: string;
+  allowWhenAuthenticated?: boolean;
 };
 
 export default function ProtectionProvider({
   children,
-  redirectTo = "/dashboard",
+  redirectTo = "/dashboard", // Default redirect path
+  allowWhenAuthenticated = false,
 }: Props) {
   const { status } = useSession();
   const router = useRouter();
@@ -19,17 +22,17 @@ export default function ProtectionProvider({
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/auth/signin");
-    } else if (status === "authenticated" && redirectTo === "/dashboard") {
-      router.push("/dashboard");
+    } else if (
+      status === "authenticated" &&
+      !allowWhenAuthenticated &&
+      redirectTo
+    ) {
+      router.push(redirectTo);
     }
-  }, [status, router, redirectTo]);
+  }, [status, router, redirectTo, allowWhenAuthenticated]);
 
   if (status === "loading") {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-      </div>
-    );
+    return <Loader />;
   }
 
   if (status === "unauthenticated") {

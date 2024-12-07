@@ -17,21 +17,9 @@ export default function RainbowProvider({ children }: Props) {
   return (
     <WagmiProvider config={wagmiConfig}>
       <SessionProvider refetchInterval={0}>
-        {/* Added RainbowKitSiweNextAuthProvider for SIWE authentication */}
         <QueryClientProvider client={queryClient}>
           <RainbowKitSiweNextAuthProvider>
-            <RainbowKitProvider
-              modalSize="compact"
-              // TODO: fix rainbow kit theme & configurations
-              // Uncomment and customize the theme below as needed
-              // theme={darkTheme({
-              //   accentColor: "#0E76FD",
-              //   accentColorForeground: "white",
-              //   borderRadius: "large",
-              //   fontStack: "system",
-              //   overlayBlur: "small",
-              // })}
-            >
+            <RainbowKitProvider modalSize="compact">
               {children}
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
