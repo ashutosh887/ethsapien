@@ -1,22 +1,36 @@
-"use client";
-
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useSession } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 
-export default function SignInPage() {
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
-  const { status } = useSession();
-  const router = useRouter();
+interface SignInPageProps {
+  callbackUrl: string;
+}
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push(callbackUrl);
-    }
-  }, [status, callbackUrl, router]);
+export const getServerSideProps: GetServerSideProps<SignInPageProps> = async (
+  context
+) => {
+  const session = await getSession(context);
+  const callbackUrl = (context.query.callbackUrl as string) || "/dashboard";
 
+  // Redirect if the user is already authenticated
+  if (session) {
+    return {
+      redirect: {
+        destination: callbackUrl,
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      callbackUrl,
+    },
+  };
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const SignInPage: React.FC<SignInPageProps> = ({ callbackUrl }) => {
   return (
     <div
       className="flex items-center justify-center bg-gray-100 dark:bg-gray-900"
@@ -35,4 +49,6 @@ export default function SignInPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SignInPage;
