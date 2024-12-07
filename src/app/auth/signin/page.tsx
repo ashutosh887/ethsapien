@@ -1,42 +1,46 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+"use client";
 
-interface SignInPageProps {
-  callbackUrl: string;
+import Loader from "@/components/custom/loader"; // Adjust the path if necessary
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<Loader />}>
+      <SignInComponent />
+    </Suspense>
+  );
 }
 
-export const getServerSideProps: GetServerSideProps<SignInPageProps> = async (
-  context
-) => {
-  const session = await getSession(context);
-  const callbackUrl = (context.query.callbackUrl as string) || "/dashboard";
+function SignInComponent() {
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
+  const { status } = useSession();
+  const router = useRouter();
 
-  // Redirect if the user is already authenticated
-  if (session) {
-    return {
-      redirect: {
-        destination: callbackUrl,
-        permanent: false,
-      },
-    };
-  }
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push(callbackUrl);
+    }
+  }, [status, callbackUrl, router]);
 
-  return {
-    props: {
-      callbackUrl,
-    },
-  };
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const SignInPage: React.FC<SignInPageProps> = ({ callbackUrl }) => {
   return (
     <div
       className="flex items-center justify-center bg-gray-100 dark:bg-gray-900"
       style={{ height: "calc(100vh - 64px)" }}
     >
       <div className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md">
+        {/* Logo */}
+        <Image
+          src="/images/logo.png"
+          alt="ETHSapien Logo"
+          width={80}
+          height={80}
+          className="mb-4"
+        />
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
           Sign In to ETHSapien
         </h1>
@@ -49,6 +53,4 @@ const SignInPage: React.FC<SignInPageProps> = ({ callbackUrl }) => {
       </div>
     </div>
   );
-};
-
-export default SignInPage;
+}
