@@ -18,7 +18,10 @@ export default function SignInPage() {
   }, [status, callbackUrl, router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div
+      className="flex items-center justify-center bg-gray-100 dark:bg-gray-900"
+      style={{ height: "calc(100vh - 64px)" }}
+    >
       <div className="flex flex-col items-center bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4 text-center">
           Sign In to ETHSapien
