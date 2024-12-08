@@ -2,7 +2,7 @@
 
 import credentialsManagerABI from "@/abi/credentialsManager.json";
 import { useContract } from "@/hooks/useContract";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 
 interface Credential {
@@ -18,13 +18,22 @@ const MyCredentials = () => {
 
   const { getContract } = useContract();
 
-  const fetchCredentials = async () => {
+  const fetchCredentials = useCallback(async () => {
     if (!address) return;
 
     const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS || "";
 
     try {
       setIsLoading(true);
+
+      if (!contractAddress) {
+        console.error("Contract address is missing.");
+        alert(
+          "Smart contract address is not configured. Please check your setup."
+        );
+        return;
+      }
+
       const contract = await getContract(
         contractAddress,
         credentialsManagerABI
@@ -33,12 +42,13 @@ const MyCredentials = () => {
 
       // Parse the returned data
       setCredentials(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        data.map((cred: any) => ({
-          name: cred.name,
-          description: cred.description,
-          issuedAt: Number(cred.issuedAt),
-        }))
+        data.map(
+          (cred: { name: string; description: string; issuedAt: string }) => ({
+            name: cred.name,
+            description: cred.description,
+            issuedAt: Number(cred.issuedAt),
+          })
+        )
       );
     } catch (error) {
       console.error("Error fetching credentials:", error);
@@ -46,13 +56,13 @@ const MyCredentials = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [address, getContract]);
 
   useEffect(() => {
     if (isConnected) {
       fetchCredentials();
     }
-  }, [isConnected, address]);
+  }, [isConnected, address, fetchCredentials]);
 
   return (
     <div className="max-w-4xl mx-auto mt-8 p-4 border rounded shadow">

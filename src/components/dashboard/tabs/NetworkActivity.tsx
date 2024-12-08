@@ -8,12 +8,12 @@ import {
 import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 
-const supportedChains = {
-  56: "BNB Chain",
-  97: "BNB Chain Testnet",
-  8453: "Base",
-  84531: "Base Goerli Testnet",
-};
+// const supportedChains = {
+//   56: "BNB Chain",
+//   97: "BNB Chain Testnet",
+//   8453: "Base",
+//   84531: "Base Goerli Testnet",
+// };
 
 const NetworkActivity = () => {
   const [network, setNetwork] = useState<string | null>(null);
