@@ -16,6 +16,7 @@ export default function Navbar() {
 
   const isSignInPage = pathname === routerConfig.signin.path;
   const isHomePage = pathname === routerConfig.home.path;
+  const isAboutPage = pathname === routerConfig.about.path;
 
   return (
     <nav className="sticky top-0 z-50 bg-gray-100 dark:bg-gray-900 shadow-md">
@@ -37,6 +38,15 @@ export default function Navbar() {
           </h1>
         </div>
         <div className="flex items-center space-x-4">
+          {!isAboutPage && (
+            <button
+              className="text-gray-800 dark:text-gray-200 hover:underline"
+              onClick={() => router.push(routerConfig.about.path)}
+            >
+              About
+            </button>
+          )}
+
           {isHomePage && (
             <button
               className="text-gray-800 dark:text-gray-200 hover:underline"

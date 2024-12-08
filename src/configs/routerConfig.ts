@@ -8,4 +8,5 @@ export const routerConfig: Record<string, RouteType> = {
   signin: { path: "/auth/signin" },
   dashboard: { path: "/dashboard" },
   profile: { path: "/profile" },
+  about: { path: "/about" },
 };

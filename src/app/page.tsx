@@ -45,11 +45,8 @@ export default function HomePage() {
 
   return (
     <div className="bg-gray-100 dark:bg-gray-900 min-h-screen pt-20">
-      <section className="text-center px-4 py-16">
-        <h1 className="text-5xl font-extrabold text-gray-800 dark:text-gray-200 mb-6">
-          Welcome to {appConfig.title}
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+      <section className="text-center px-4 py-24 md:py-32">
+        <p className="text-2xl md:text-3xl text-gray-600 dark:text-gray-400 mb-12 max-w-4xl mx-auto leading-relaxed">
           {appConfig.description}
         </p>
         <div className="flex justify-center space-x-4">
