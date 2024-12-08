@@ -1,5 +1,6 @@
 import Navbar from "@/components/custom/navbar";
 import appConfig from "@/configs/appConfig";
+import HuddleClientProvider from "@/providers/HuddleClientProvider";
 import RainbowProvider from "@/providers/RainbowProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Poppins } from "next/font/google";
@@ -18,9 +19,9 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
@@ -31,8 +32,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <RainbowProvider>
-            <Navbar />
-            <main>{children}</main>
+            <HuddleClientProvider>
+              <Navbar />
+              <main>{children}</main>
+            </HuddleClientProvider>
           </RainbowProvider>
         </ThemeProvider>
       </body>
