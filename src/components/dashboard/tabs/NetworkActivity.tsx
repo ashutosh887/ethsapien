@@ -34,7 +34,9 @@ const NetworkActivity = () => {
         const chainIdAsNumber = Number(networkInfo.chainId);
 
         setChainId(chainIdAsNumber);
-        setNetwork(supportedChains[chainIdAsNumber] || "Unsupported Network");
+        // TODO
+        // setNetwork(supportedChains[chainIdAsNumber] || "Unsupported Network");
+        setNetwork("No Network");
       } catch (error) {
         console.error("Error fetching network:", error);
         setNetwork("Error fetching network");
